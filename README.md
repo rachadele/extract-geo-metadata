@@ -12,8 +12,8 @@ Outputs the extracted metadata in a tab-separated values (TSV) file for easy ana
 ## Usage
 1. Clone this repository to your local machine:
 ```
-git clone https://github.com/your-username/geo-metadata-extractor.git
-cd geo-metadata-extractor
+git clone https://github.com/your-username/extract-geo-metadata.git
+cd extract-geo-metadata
 ```
 2. Install the required Python libraries:
 ```
