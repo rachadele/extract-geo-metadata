@@ -120,7 +120,8 @@ def main(args):
         platform_id=args.platform
         matching_samples.extend(filter_platform(samples,platform_id))
     if args.platform and args.organism:
-        matching_samples.extend(filter_platform_organsim(samples, platform_id, organism)
+        matching_samples.extend(filter_platform_organsim(samples, platform_id, organism))
+                                
     if not matching_samples:
         print("matching samples empty")
         matching_samples=samples
