@@ -53,7 +53,7 @@ def filter_organism(samples,organism):
     org_samples = []
     for sample in samples:
         organism_tag = sample.find('Organism')
-        print(organism_tag)
+        print(organism_tag.text)
         if organism_tag in organism_tag.attrs and organism_tag.text == organism:
             org_samples.append(sample)
     return org_samples
@@ -61,7 +61,7 @@ def filter_organism(samples,organism):
 def filter_platform(samples, platform_id):
     platform_samples = []
     for sample in samples:
-        platform_tag = sample.find("Platform")
+        platform_tag = sample.find("Platform ID")
         print(platform_tag)
         if platform_tag and platform_tag.text == platform_id:
             platform_samples.append(sample)
