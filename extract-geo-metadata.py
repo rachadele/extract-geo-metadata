@@ -108,7 +108,8 @@ def main(args):
         matching_samples.append(filter_platform(samples,platform_id))
     if args.platform and args.organism:
         #remove duplicate samples here
-         matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
+        matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
+        print(matching_samples)
     if not matching_samples:
         print("matching samples empty")
         matching_samples=samples
