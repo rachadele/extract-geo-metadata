@@ -130,7 +130,7 @@ def main(args):
         
     sample_df=extract_metadata(matching_samples)
     sample_df.to_csv(path_or_buf=GSE + '.tsv', sep='\t', index=False)
-    print("Wrote samples to tsv")
+    print("Wrote samples to " GSE + "tsv")
 
 if __name__ == '__main__':
     # Create an argument parser
