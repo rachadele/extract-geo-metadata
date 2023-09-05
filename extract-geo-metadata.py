@@ -51,6 +51,7 @@ def extract_samples(GSE):
 def filter_organism(samples,organism):
     #extract only human samples
     org_samples = []
+    print(organism)
     for sample in samples:
         organism_tag = sample.find('Organism')
      #   print(organism_tag.text)
@@ -61,6 +62,7 @@ def filter_organism(samples,organism):
 
 def filter_platform(samples, platform_id):
     platform_samples = []
+    print(platofrm_id)
     for sample in samples:
         platform_tag = sample.find("Platform ID")
         print(platform_tag)
@@ -105,11 +107,9 @@ def main(args):
     matching_samples=[]
     if args.organism:
         organism = args.organism
-        print(organism)
         matching_samples.extend(filter_organism(samples,organism))
     if args.platform:
         platform_id=args.platform
-        print(platform_id)
         matching_samples.extend(filter_platform(samples,platform_id))
  #   if args.platform and args.organism:
         #remove duplicate samples here
