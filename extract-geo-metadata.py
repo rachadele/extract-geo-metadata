@@ -48,15 +48,35 @@ def extract_samples(GSE):
     samples = soup.find_all('Sample')
     return samples
 
-def filter_human(samples):
+def filter_organism(samples,organism):
     #extract only human samples
-    human_samples = []
+    org_samples = []
     for sample in samples:
         organism_tag = sample.find('Organism')
-        if organism_tag and 'taxid' in organism_tag.attrs and organism_tag.text == 'Homo sapiens' and organism_tag[
-            'taxid'] == '9606':
-            human_samples.append(sample)
-    return human_samples
+        if organism_tag.text == organism:
+            org_samples.append(sample)
+    return org_samples
+
+def filter_platform(samples, platform_id):
+    platform_samples = []
+    #print(platform_id)
+    for sample in samples:
+        platform_ref = sample.find('Platform-Ref')
+        if platform_ref and 'ref' in platform_ref.attrs and platform_ref['ref'] == platform_id:
+            platform_samples.append(sample)
+    return platform_samples
+
+def filter_platform_organism(samples, platform_id, organism_name):
+    filtered_samples = []
+    for sample in samples:
+        platform_ref = sample.find('Platform-Ref')
+        organism_tag = sample.find('Organism') 
+        if (
+            platform_ref['ref']  == platform_id and
+            organism_tag.text == organism_name
+        ):
+            filtered_samples.append(sample)
+    return filtered_samples
 
 def extract_metadata(matching_samples):
     sample_dfs = []
@@ -88,16 +108,28 @@ def extract_metadata(matching_samples):
     return sample_df
 
 def main(args):
-    is_human = args.human
+    #organism = args.organism
     GSE=args.GSE
     download_miniml_file(GSE)
     samples=extract_samples(GSE)
-    if is_human:
-        matching_samples=filter_human(samples)
-    else:
+    matching_samples=[]
+    if args.organism and not args.platform:
+        organism = args.organism
+        matching_samples.extend(filter_organism(samples,organism))
+    if args.platform and not args.organism:
+        platform_id=args.platform
+        matching_samples.extend(filter_platform(samples,platform_id))
+    if args.platform and args.organism:
+        platform_id=args.platform
+        organism = args.organism
+        matching_samples.extend(filter_platform_organism(samples, platform_id, organism))
+                                
+    if not matching_samples:
         matching_samples=samples
+        
     sample_df=extract_metadata(matching_samples)
     sample_df.to_csv(path_or_buf=GSE + '.tsv', sep='\t', index=False)
+    print("Wrote samples to " + GSE + ".tsv")
 
 if __name__ == '__main__':
     # Create an argument parser
@@ -105,7 +137,8 @@ if __name__ == '__main__':
 
     # Add an argument for the GSE accession
     parser.add_argument("GSE", type=str, help="The GSE accession to download")
-    parser.add_argument("--human", action="store_true", help="Only download human samples")
+    parser.add_argument("--organism", type=str, help="Filter on given organism name")
+    parser.add_argument("--platform", type=str, help="Filter on given platform ID")
 
     # Parse the command-line arguments
     args = parser.parse_args()
