@@ -51,13 +51,10 @@ def extract_samples(GSE):
 def filter_organism(samples,organism):
     #extract only human samples
     org_samples = []
-    print(organism)
     for sample in samples:
         organism_tag = sample.find('Organism')
-     #   print(organism_tag.text)
         if organism_tag.text == organism:
             org_samples.append(sample)
-            print(sample)
     return org_samples
 
 def filter_platform(samples, platform_id):
