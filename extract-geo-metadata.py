@@ -55,7 +55,7 @@ def filter_organism(samples,organism):
     for sample in samples:
         organism_tag = sample.find('Organism')
      #   print(organism_tag.text)
-        if organism_tag in organism_tag.attrs and organism_tag.text == organism:
+        if organism_tag.text == organism:
             org_samples.append(sample)
             print(sample)
     return org_samples
