@@ -102,9 +102,11 @@ def main(args):
     matching_samples=[]
     if args.organism:
         organism = args.organism
+        print(organism)
         matching_samples.append(filter_organism(samples,organism))
     if args.platform:
         platform_id=args.platform
+        print(platform_id)
         matching_samples.append(filter_platform(samples,platform_id))
     if args.platform and args.organism:
         #remove duplicate samples here
