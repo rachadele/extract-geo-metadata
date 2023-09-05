@@ -53,6 +53,7 @@ def filter_organism(samples,organism):
     org_samples = []
     for sample in samples:
         organism_tag = sample.find('Organism')
+        print(organism_tag)
         if organism_tag in organism_tag.attrs and organism_tag.text == organism:
             org_samples.append(sample)
     return org_samples
@@ -61,6 +62,7 @@ def filter_platform(samples, platform_id):
     platform_samples = []
     for sample in samples:
         platform_tag = sample.find("Platform")
+        print(platform_tag)
         if platform_tag and platform_tag.text == platform_id:
             platform_samples.append(sample)
     return platform_samples
@@ -111,7 +113,7 @@ def main(args):
     if args.platform and args.organism:
         #remove duplicate samples here
         matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
-        print(matching_samples)
+        #print(matching_samples)
     if not matching_samples:
         print("matching samples empty")
         matching_samples=samples
