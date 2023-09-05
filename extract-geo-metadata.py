@@ -66,6 +66,18 @@ def filter_platform(samples, platform_id):
             platform_samples.append(sample)
     return platform_samples
 
+def filter_platform_organism(samples, platform_id, organism_name):
+    filtered_samples = []
+    for sample in samples:
+        platform_ref = sample.find('Platform-Ref')
+        organism_tag = sample.find('Organism') 
+        if (
+            platform_ref['ref']  == platform_id and
+            organism_tag.text == organism_name
+        ):
+            filtered_samples.append(sample)
+    return filtered_samples
+
 def extract_metadata(matching_samples):
     sample_dfs = []
 
@@ -101,16 +113,14 @@ def main(args):
     download_miniml_file(GSE)
     samples=extract_samples(GSE)
     matching_samples=[]
-    if args.organism:
+    if args.organism and not args.platform:
         organism = args.organism
         matching_samples.extend(filter_organism(samples,organism))
-    if args.platform:
+    if args.platform and not args.organism:
         platform_id=args.platform
         matching_samples.extend(filter_platform(samples,platform_id))
- #   if args.platform and args.organism:
-        #remove duplicate samples here
- #       matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
-        #print(matching_samples)
+    if args.platform and args.organism:
+        matching_samples.extend(filter_platform_organsim(samples, platform_id, organism)
     if not matching_samples:
         print("matching samples empty")
         matching_samples=samples
