@@ -105,7 +105,7 @@ def main(args):
         matching_samples.append(filter_organism(samples,organism))
     if args.platform:
         platform_id=args.platform
-        matching_samples.append(filter_platform(samples,platform))
+        matching_samples.append(filter_platform(samples,platform_id))
     if args.platform and args.organism:
         #remove duplicate samples here
          matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
