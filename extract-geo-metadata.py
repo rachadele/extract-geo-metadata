@@ -62,7 +62,7 @@ def filter_organism(samples,organism):
 
 def filter_platform(samples, platform_id):
     platform_samples = []
-    print(platofrm_id)
+    #print(platform_id)
     for sample in samples:
         platform_tag = sample.find("Platform ID")
         print(platform_tag)
