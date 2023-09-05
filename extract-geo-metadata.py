@@ -61,9 +61,8 @@ def filter_platform(samples, platform_id):
     platform_samples = []
     #print(platform_id)
     for sample in samples:
-        platform_tag = sample.find("Platform ID")
-        print(platform_tag)
-        if platform_tag and platform_tag.text == platform_id:
+        platform_ref = sample.find('Platform-Ref')
+        if platform_ref and 'ref' in platform_ref.attrs and platform_ref['ref'] == platform_id:
             platform_samples.append(sample)
     return platform_samples
 
