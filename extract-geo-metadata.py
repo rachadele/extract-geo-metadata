@@ -54,7 +54,7 @@ def filter_organism(samples,organism):
     for sample in samples:
         organism_tag = sample.find('Organism')
         if organism_tag in organism_tag.attrs and organism_tag.text == organism:
-            human_samples.append(sample)
+            org_samples.append(sample)
     return org_samples
 
 def filter_platform(samples, platform_id):
@@ -62,7 +62,7 @@ def filter_platform(samples, platform_id):
     for sample in samples:
         platform_tag = sample.find("Platform")
         if platform_tag and platform_tag.text == platform_id:
-            filtered_samples.append(sample)
+            platform_samples.append(sample)
     return platform_samples
 
 def extract_metadata(matching_samples):
