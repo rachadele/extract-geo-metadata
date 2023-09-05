@@ -102,7 +102,7 @@ def main(args):
     matching_samples=[]
     if args.organism:
         organism = args.organism
-        matching_samples.append(filter_organsim(samples,organism))
+        matching_samples.append(filter_organism(samples,organism))
     if args.platform:
         platform_id=args.platform
         matching_samples.append(filter_platform(samples,platform))
