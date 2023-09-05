@@ -110,10 +110,12 @@ def main(args):
         #remove duplicate samples here
          matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
     if not matching_samples:
+        print("matching samples empty")
         matching_samples=samples
         
     sample_df=extract_metadata(matching_samples)
     sample_df.to_csv(path_or_buf=GSE + '.tsv', sep='\t', index=False)
+    print("Wrote samples to tsv")
 
 if __name__ == '__main__':
     # Create an argument parser
