@@ -125,12 +125,11 @@ def main(args):
         matching_samples.extend(filter_platform_organism(samples, platform_id, organism))
                                 
     if not matching_samples:
-        print("matching samples empty")
         matching_samples=samples
         
     sample_df=extract_metadata(matching_samples)
     sample_df.to_csv(path_or_buf=GSE + '.tsv', sep='\t', index=False)
-    print("Wrote samples to " GSE + "tsv")
+    print("Wrote samples to " + GSE + "tsv")
 
 if __name__ == '__main__':
     # Create an argument parser
