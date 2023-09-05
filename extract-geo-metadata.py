@@ -111,9 +111,9 @@ def main(args):
         platform_id=args.platform
         print(platform_id)
         matching_samples.extend(filter_platform(samples,platform_id))
-    if args.platform and args.organism:
+ #   if args.platform and args.organism:
         #remove duplicate samples here
-        matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
+ #       matching_samples = list(set(matching_samples[0]).intersection(matching_samples[1]))
         #print(matching_samples)
     if not matching_samples:
         print("matching samples empty")
