@@ -91,9 +91,12 @@ def extract_metadata(matching_samples):
         biosample_url = biosample_tag['target']
         biosample_id = biosample_url.split("/")[-1]
         chars = sample.find_all('Characteristics')
-
+        instrument_model = sample.find('Instrument-Model').find('Predefined').text
+        extract_protocol = sample.find('Extract-Protocol').text.strip()
+        library_strategy = sample.find('Library-Strategy').text
+        
         # Create a dictionary to store the characteristics for this sample
-        sample_dict = {'Sample_ID': sample_id, 'Title': title, 'Organism': org, 'BioSample_ID': biosample_id}
+        sample_dict = {'Sample_ID': sample_id, 'Title': title, 'Organism': org, 'BioSample_ID': biosample_id, 'Instrument model': instrument_model, 'Extraction protocol': extract_protocol, 'Library strategy': library_strategy}
 
         # Iterate through characteristics for each sample and add them to the dictionary
         for characteristic in chars:
