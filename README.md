@@ -23,11 +23,16 @@ pip install -r requirements.txt
 ```
 python geo_metadata_extractor.py GSE123456
 ```
-4. To filter for human data, use the --human flag:
+4. To filter for a specific organism, use the --organism flag:
 ```
-python geo_metadata_extractor.py GSE123456 --human
+python geo_metadata_extractor.py GSE123456 --organism Homo sapiens
 ```
-5. The extracted metadata will be saved as a TSV file named GSE123456.tsv in the same directory.
+5. To filter by platform, use the --platform flag:
+```
+python geo_metadata_extractor.py GSE123456 --platform GPL12345
+```
+The platform and organism tag may be passed together to return metadata for only samples matching given organism AND platform.
+The extracted metadata will be saved as a TSV file named GSE123456.tsv in the same directory. 
 
 ## Acknowledgments
 This script uses the BeautifulSoup library for XML parsing.
