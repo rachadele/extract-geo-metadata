@@ -25,7 +25,7 @@ python geo_metadata_extractor.py GSE123456
 ```
 4. To filter for a specific organism, use the --organism flag:
 ```
-python geo_metadata_extractor.py GSE123456 --organism Homo sapiens
+python geo_metadata_extractor.py GSE123456 --organism "Homo sapiens"
 ```
 5. To filter by platform, use the --platform flag:
 ```
