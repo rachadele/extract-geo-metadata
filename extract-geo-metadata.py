@@ -5,17 +5,6 @@ import os
 import requests
 import tarfile
 
-
-#def extract_xml_content(GSE):
-#	entrez.email = "raschwar@ucsc.edu"	
-#	search_results = Entrez.esearch(db="gds", term=GSE)
-#	record = Entrez.read(search_results)
-#	geo_records = []
-#	for record_id in record["IdList"]:
-#		geo_record = Entrez.efetch(db="gds", id=record_id, rettype="xml", retmode="text")
-#		geo_records.append(geo_record.read())
-#	return geo_records
-	
 def download_miniml_file(GSE):
     stub = GSE[:-3] + 'nnn'  # Replace the last three characters of the accession with "nnn"
     url = f"https://ftp.ncbi.nlm.nih.gov/geo/series/{stub}/{GSE}/miniml/{GSE}_family.xml.tgz"
